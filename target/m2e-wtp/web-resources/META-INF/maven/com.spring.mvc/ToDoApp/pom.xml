@@ -26,6 +26,24 @@
 			<version>3.0.0</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+    <groupId>org.apache.tomcat</groupId>
+    <artifactId>tomcat-catalina</artifactId>
+    <version>9.0.65</version>
+    <scope>provided</scope>
+</dependency>
+<dependency>
+    <groupId>org.apache.tomcat</groupId>
+    <artifactId>tomcat-jdbc</artifactId>
+    <version>9.0.65</version>
+    <scope>provided</scope>
+</dependency>
+<dependency>
+    <groupId>org.apache.tomcat</groupId>
+    <artifactId>tomcat-util</artifactId>
+    <version>9.0.65</version>
+    <scope>provided</scope>
+</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
