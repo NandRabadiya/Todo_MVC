@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.dao.TodoDao;
 import com.entities.Todo;
 
 import jakarta.servlet.ServletContext;
@@ -23,6 +24,8 @@ public class HomeCtrl {
 	@Autowired
 	ServletContext context;
 	
+	@Autowired
+	TodoDao todoDao;
 	
 	
 	@RequestMapping("/home")
@@ -32,9 +35,10 @@ public class HomeCtrl {
 		m.addAttribute("page",str);
 		
 		
-		List<Todo> list=(List<Todo>) context.getAttribute("list");
+		//List<Todo> list=(List<Todo>) context.getAttribute("list");
 		
-		m.addAttribute("todos",list);
+		List<Todo> list=this.todoDao.getAll();		
+	m.addAttribute("todos",list);
 		
 		
 		return "home";
@@ -52,16 +56,17 @@ public class HomeCtrl {
 	@RequestMapping(value="/saveTodo",method = RequestMethod.POST)
 	public String saveTodo(@ModelAttribute("todo") Todo t ,Model m) {
 		
-		
+		m.addAttribute("page", "home");
 		System.out.println(t);
 		t.setTodoDate(new Date());
+		this.todoDao.save(t);
 		
 		//geting todo list from context
 			
-		@SuppressWarnings("unchecked")
-		List<Todo> list=(List<Todo>) context.getAttribute("list");
-		list.add(t);
-		
+//		@SuppressWarnings("unchecked")
+//		List<Todo> list=(List<Todo>) context.getAttribute("list");
+//		list.add(t);
+//		
 		m.addAttribute("msg","Successfully added");
 		
 		return "home";
